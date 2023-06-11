@@ -19,6 +19,13 @@ html, body {
     outline: none;
 }
 
+#form_container {
+    background-color: rgba(240, 240, 240, 0.5);
+    border-radius: 3%;
+    backdrop-filter: blur(5px);
+
+}
+
 #content_container {
     width: 30%;
     height: 70%;
@@ -28,18 +35,20 @@ html, body {
     align-items: center;
     flex-direction: column; /* This property arranges the inner items in a column */
 }
+
 #form_header_container{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
 }
 
 #form_content_container {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 30px;
-    margin-bottom: 40px; /* Add margin-bottom to create space between the content container and other elements */
+    padding-top: 40px;
+    margin-bottom: 30px; /* Add margin-bottom to create space between the content container and other elements */
 }
 
 

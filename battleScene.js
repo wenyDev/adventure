@@ -5,7 +5,8 @@ const battleBackground = new Sprite({
     x: 0,
     y: 0
   },
-  image: battleBackgroundImage
+  image: battleBackgroundImage,
+  
 })
 
 let draggle
@@ -123,7 +124,7 @@ function animateBattle() {
   })
 }
 
-animate()
+//animate()
 // initBattle()
 // animateBattle()
 

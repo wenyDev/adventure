@@ -1,0 +1,64 @@
+#login {
+    width: 100%;
+    height: 100%;
+    background: url('./img/Login.png');
+    background-position: -400px -350px; /* moves the image 50px to the left and up */
+}
+
+html, body {
+    margin: 0 ;
+    padding: 0 ;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+}
+
+#content_container {
+    width: 30%;
+    height: 70%;
+    margin: auto; /* This property replaces your current margins and helps to center the container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* This property arranges the inner items in a column */
+}
+#form_header_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#form_content_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+    margin-bottom: 40px; /* Add margin-bottom to create space between the content container and other elements */
+}
+
+
+
+#form_content_inner_container {
+    width: 75%;
+    height: 100%;
+    float: left;
+
+}
+
+
+input {
+    width: 100%;
+    height: 40px;
+    padding-left: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid transparent;
+    border-top-left-radius: 2%;
+    border-top-right-radius: 2%;
+   
+}

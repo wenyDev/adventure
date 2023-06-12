@@ -7,7 +7,7 @@ class Sprite {
     sprites,
     animate = false,
     rotation = 0,
-    scale = 1
+    scale = 1,
   }) {
     this.position = position
     this.image = new Image()
@@ -17,11 +17,9 @@ class Sprite {
       this.height = this.image.height * scale
     }
     this.image.src = image.src
-
     this.animate = animate
     this.sprites = sprites
     this.opacity = 1
-
     this.rotation = rotation
     this.scale = scale
   }
@@ -82,7 +80,8 @@ class Sprite {
       else this.frames.val = 0
     }
   }
-}
+  
+} 
 
 class Monster extends Sprite {
   constructor({
@@ -226,6 +225,7 @@ class Monster extends Sprite {
     }
   }
 }
+
 
 class Boundary {
   static width = 48

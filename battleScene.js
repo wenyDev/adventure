@@ -55,11 +55,9 @@ function initBattle() {
               cancelAnimationFrame(battleAnimationId)
               animate()
               document.querySelector('#userInterface').style.display = 'none'
-
               gsap.to('#overlappingDiv', {
                 opacity: 0
               })
-
               battle.initiated = false
               audio.Map.play()
             }
@@ -117,16 +115,13 @@ function animateBattle() {
   battleAnimationId = window.requestAnimationFrame(animateBattle)
   battleBackground.draw()
 
-  console.log(battleAnimationId)
+  //console.log(battleAnimationId)
 
   renderedSprites.forEach((sprite) => {
     sprite.draw()
   })
 }
 
-//animate()
-// initBattle()
-// animateBattle()
 
 document.querySelector('#dialogueBox').addEventListener('click', (e) => {
   if (queue.length > 0) {

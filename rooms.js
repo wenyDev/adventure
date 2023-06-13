@@ -42,26 +42,25 @@ const playerRooms = new Player({
           onComplete: () => {
             level++;
             count++;
-            
-            if(count > 3 && count % 3 === 1){
-                currentScene = 1
-                playerRooms.preventInput = true
-                cancelAnimationFrame(animateRoomId)
-                player.position.x = 190;
-                player.position.y = 250;
-                battle.initiated = false 
-                animate()
-                audio.Map.play() 
-                updateUser('coins', 1)
-                level = 1
-                count = 0
-                
-            }
-            
+        
             if (level === 4) level = 1
             levels[level].init()
             playerRooms.switchSprite('idleRight')
             playerRooms.preventInput = false
+
+            if(count === 4){
+              playerRooms.preventInput = true
+              cancelAnimationFrame(animateRoomId)
+              currentScene = 1
+              animate() 
+              player.position.x = 190;
+              player.position.y = 250;
+              battle.initiated = false
+              audio.Map.play()
+              updateUser('coins', 1)
+              count = 1
+            } 
+            
             gsap.to(overlay, {
               opacity: 0,
             })
@@ -73,7 +72,7 @@ const playerRooms = new Player({
 })
 
 let level = 1
-let count = 0
+let count = 1
 let levels = {
   1: {
     init: () => {
@@ -82,6 +81,7 @@ let levels = {
       playerRooms.collisionBlocks = collisionBlocks
       document.getElementById('coins_header').style.display = 'none';
       if (playerRooms.currentAnimation) playerRooms.currentAnimation.isActive = false
+      playerRooms.preventInput = false
 
       backgroundRooms = new SpriteRooms({
         position: {
@@ -104,6 +104,7 @@ let levels = {
           autoplay: false,
         }),
       ]
+
     },
   },
   2: {
@@ -137,6 +138,7 @@ let levels = {
           autoplay: false,
         }),
       ]
+
     },
   },
   3: {
@@ -169,6 +171,7 @@ let levels = {
           autoplay: false,
         }),
       ]
+
     },
   },
 }
@@ -190,7 +193,7 @@ function animateRoom() {
   playerRooms.handleInput(keys)
   playerRooms.draw()
   playerRooms.update()
-  
+
   c.save()
   c.globalAlpha = overlay.opacity
   c.fillStyle = 'black'

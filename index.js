@@ -450,7 +450,6 @@ function roomsMap(event){
 		  case 'a':
 			// move player to the left
 			keys.a.pressed = true
-			console.log('sss2')
 			break
 		  case 'd':
 			// move player to the right

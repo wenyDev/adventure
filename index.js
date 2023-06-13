@@ -87,6 +87,10 @@ playerLeftImage.src = './img/playerLeft.png';
 const playerRightImage = new Image();
 playerRightImage.src = './img/playerRight.png';
 
+const coinsImage = new Image();
+coinsImage.src = './img/coins.png';
+
+
 
 const player = new Sprite({
 	position: {
@@ -120,6 +124,18 @@ const foreground = new Sprite({
 		y: offset.y
 	},
 	image: foregroundImage
+});
+
+const coins = new Sprite({
+	position:{
+		x: 20,
+		y: -20
+	},
+	frames: {
+		max:7,
+		hold: 10
+	},
+	image: coinsImage
 });
 
 const keys = {
@@ -172,10 +188,12 @@ function animate() {
 	})
 
 	player.draw();
+	coins.draw();
 	foreground.draw();
 
 	let moving = true;
 	player.animate = false;
+	coins.animate = true
 
 	//console.log(animationId)
 	if(battle.initiated) return

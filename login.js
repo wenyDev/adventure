@@ -91,6 +91,7 @@ function login () {
 
     // Push to Firebase Database
     database_ref.child('users/' + user.uid).update(user_data)
+    updateUser('coins', 0);
 
     // Done
     alert('User Logged In!!')
@@ -171,41 +172,14 @@ async function updateUser(field, value) {
     var fieldValue = await get(field)
 
     var updates = {}
-    updates[field] = fieldValue + value
-
+    updates[field] = fieldValue + value;
+    document.getElementById('coins_count').innerText = fieldValue + value;
     database.ref('users/' + uid).update(updates)
 
   } catch (error) {
     console.error("Error updating: ", error);
   }
 }
-
-
-
-async function updateCoins() {
-  var user = auth.currentUser
-  if (!user) {
-    console.error("User not logged in")
-    return
-  }
-
-  var uid = user.uid
-
-  try {
-    var coins = await get('coins')
-
-    var updates = {
-      coins : coins + 1,
-    }
-
-    database.ref('users/' + uid).update(updates)
-
-    alert('Coins updated')
-  } catch (error) {
-    console.error("Error updating coins: ", error);
-  }
-}
-
 
 
 function remove() {

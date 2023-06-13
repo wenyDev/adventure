@@ -57,7 +57,6 @@ html, body {
     width: 75%;
     height: 100%;
     float: left;
-
 }
 
 
@@ -69,5 +68,6 @@ input {
     border-bottom: 2px solid transparent;
     border-top-left-radius: 2%;
     border-top-right-radius: 2%;
-   
 }
+
+

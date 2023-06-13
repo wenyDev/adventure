@@ -20,6 +20,7 @@ function initBattle() {
   document.querySelector('#dialogueBox').style.display = 'none'
   document.querySelector('#enemyHealthBar').style.width = '100%'
   document.querySelector('#playerHealthBar').style.width = '100%'
+  document.getElementById('coins_header').style.display = 'none';
   document.querySelector('#attacksBox').replaceChildren()
 
   draggle = new Monster(monsters.Draggle)
@@ -45,7 +46,6 @@ function initBattle() {
 
       if (draggle.health <= 0) {
         updateUser('coins', 1)
-        console.log("test3")
         
         queue.push(() => {
           draggle.faint()
@@ -58,6 +58,7 @@ function initBattle() {
               cancelAnimationFrame(battleAnimationId)
               animate()
               document.querySelector('#userInterface').style.display = 'none'
+              document.getElementById('coins_header').style.display = 'block';
               gsap.to('#overlappingDiv', {
                 opacity: 0
               })
@@ -92,7 +93,7 @@ function initBattle() {
                 cancelAnimationFrame(battleAnimationId)
                 animate()
                 document.querySelector('#userInterface').style.display = 'none'
-
+                document.getElementById('coins_header').style.display = 'block';
                 gsap.to('#overlappingDiv', {
                   opacity: 0
                 })

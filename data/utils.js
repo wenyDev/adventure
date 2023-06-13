@@ -7,11 +7,11 @@ Array.prototype.parse2D = function () {
     return rows
   }
   
-  Array.prototype.createObjectsFrom2D = function () {
+  Array.prototype.createObjectsFrom2D = function (numberC) {
     const objects = []
     this.forEach((row, y) => {
       row.forEach((symbol, x) => {
-        if (symbol === 292 || symbol === 250) {
+        if (symbol === numberC) {
           // push a new collision into collisionblocks array
           objects.push(
             new CollisionBlock({
@@ -27,4 +27,5 @@ Array.prototype.parse2D = function () {
   
     return objects
   }
+
   

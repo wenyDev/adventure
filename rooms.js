@@ -45,13 +45,19 @@ const playerRooms = new Player({
             
             if(count > 3 && count % 3 === 1){
                 currentScene = 1
-                battle.initiated = false
+                playerRooms.preventInput = true
                 cancelAnimationFrame(animateRoomId)
-                player.position.x = 190
-                player.position.y = 250
-                animate()    
-                audio.Map.play()    
+                player.position.x = 190;
+                player.position.y = 250;
+                battle.initiated = false 
+                animate()
+                audio.Map.play() 
+                updateUser('coins', 1)
+                level = 1
+                count = 0
+                
             }
+            
             if (level === 4) level = 1
             levels[level].init()
             playerRooms.switchSprite('idleRight')
@@ -72,8 +78,9 @@ let levels = {
   1: {
     init: () => {
       parsedCollisions = collisionsLevel1.parse2D()
-      collisionBlocks = parsedCollisions.createObjectsFrom2D()
+      collisionBlocks = parsedCollisions.createObjectsFrom2D(292)
       playerRooms.collisionBlocks = collisionBlocks
+      document.getElementById('coins_header').style.display = 'none';
       if (playerRooms.currentAnimation) playerRooms.currentAnimation.isActive = false
 
       backgroundRooms = new SpriteRooms({
@@ -102,7 +109,7 @@ let levels = {
   2: {
     init: () => {
       parsedCollisions = collisionsLevel2.parse2D()
-      collisionBlocks = parsedCollisions.createObjectsFrom2D()
+      collisionBlocks = parsedCollisions.createObjectsFrom2D(292)
       playerRooms.collisionBlocks = collisionBlocks
       playerRooms.position.x = 96
       playerRooms.position.y = 140
@@ -135,7 +142,7 @@ let levels = {
   3: {
     init: () => {
       parsedCollisions = collisionsLevel3.parse2D()
-      collisionBlocks = parsedCollisions.createObjectsFrom2D()
+      collisionBlocks = parsedCollisions.createObjectsFrom2D(250)
       playerRooms.collisionBlocks = collisionBlocks
       playerRooms.position.x = 750
       playerRooms.position.y = 230
@@ -173,7 +180,7 @@ const overlay = {
 }
 
 function animateRoom() {
-    animateRoomId = window.requestAnimationFrame(animateRoom)
+  animateRoomId = window.requestAnimationFrame(animateRoom)
 
   backgroundRooms.draw()
   doors.forEach((door) => {
@@ -183,7 +190,7 @@ function animateRoom() {
   playerRooms.handleInput(keys)
   playerRooms.draw()
   playerRooms.update()
-
+  
   c.save()
   c.globalAlpha = overlay.opacity
   c.fillStyle = 'black'

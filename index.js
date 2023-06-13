@@ -4,6 +4,7 @@ const c = canvas.getContext('2d');
 canvas.width = 1024;
 canvas.height = 576;
 
+
 const collisionsMap = [];
 for (let i = 0; i < collisions.length; i += 70) {
   collisionsMap.push(collisions.slice(i, i + 70));
@@ -173,6 +174,7 @@ const battle = {
 
 function animate() {
 	const animationId = window.requestAnimationFrame(animate);
+	document.getElementById('coins_header').style.display = 'block';   
 
 	background.draw();
 	boundaries.forEach((boundary) => {
@@ -266,7 +268,7 @@ function animate() {
 						}
 					}
 				}) && overlappingArea > (player.width * player.height) / 2 &&
-				Math.random() < 0.1
+				Math.random() < 0.01
 			) {
 				// deactive the current animation loop
 				window.cancelAnimationFrame(animationId);

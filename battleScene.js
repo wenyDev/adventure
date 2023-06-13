@@ -44,6 +44,9 @@ function initBattle() {
       })
 
       if (draggle.health <= 0) {
+        updateUser('coins', 1)
+        console.log("test3")
+        
         queue.push(() => {
           draggle.faint()
         })

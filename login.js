@@ -19,7 +19,7 @@ function register () {
   // Get all our input fields
   email = document.getElementById('email').value
   password = document.getElementById('password').value
-  full_name = document.getElementById('full_name').value
+  username = document.getElementById('username').value
   
 
   // Validate input fields
@@ -42,7 +42,8 @@ function register () {
     // Create User data
     var user_data = {
       email : email, 
-      full_name : full_name,
+      username : username,
+      coins: 0,
       last_login : Date.now()
     }
 
@@ -82,6 +83,7 @@ function login () {
     // Add this user to Firebase Database
     var database_ref = database.ref()
 
+
     // Create User data
     var user_data = {
       last_login : Date.now()
@@ -108,7 +110,6 @@ function login () {
 }
 
 
-
 // Validate Functions
 function validate_email(email) {
   expression = /^[^@]+@\w+(\.\w+)+\w$/
@@ -128,4 +129,89 @@ function validate_password(password) {
   } else {
     return true
   }
+}
+
+
+function get(field) {
+  return new Promise((resolve, reject) => {
+    var user = auth.currentUser;
+    if (!user) {
+      reject("User not found");
+      return;
+    }
+    var uid = user.uid;
+    var user_ref = database.ref('users/' + uid);
+
+    user_ref.once('value')
+      .then(function(snapshot) {
+        var data = snapshot.val();
+        if (data && data.hasOwnProperty(field)) {
+          resolve(data[field]);
+        } else {
+          reject("Data field not found");
+        }
+      })
+      .catch(function(error) {
+        reject(error);
+      });
+  });
+}
+
+
+async function updateUser(field, value) {
+  var user = auth.currentUser
+  if (!user) {
+    console.error("User not logged in")
+    return
+  }
+
+  var uid = user.uid
+
+  try {
+    var fieldValue = await get(field)
+
+    var updates = {}
+    updates[field] = fieldValue + value
+
+    database.ref('users/' + uid).update(updates)
+
+  } catch (error) {
+    console.error("Error updating: ", error);
+  }
+}
+
+
+
+async function updateCoins() {
+  var user = auth.currentUser
+  if (!user) {
+    console.error("User not logged in")
+    return
+  }
+
+  var uid = user.uid
+
+  try {
+    var coins = await get('coins')
+
+    var updates = {
+      coins : coins + 1,
+    }
+
+    database.ref('users/' + uid).update(updates)
+
+    alert('Coins updated')
+  } catch (error) {
+    console.error("Error updating coins: ", error);
+  }
+}
+
+
+
+function remove() {
+  var username = document.getElementById('username').value
+
+  database.ref('users/' + username).remove()
+
+  alert('deleted')
 }
